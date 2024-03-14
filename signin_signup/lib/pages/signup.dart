@@ -17,6 +17,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
 
@@ -88,6 +89,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 30),
                   TextFormWidget(
+                    controller: _passwordController,
                     hintText: 'Enter password',
                     obscureText: true,
                     validator: (value) {
@@ -164,9 +166,10 @@ class _SignUpState extends State<SignUp> {
   Future<void> _signUp() async {
     try {
       await widget.preferenceService.setUsername(_usernameController.text);
-      await widget.preferenceService.setEmail(_emailController.text);
+      await widget.preferenceService.setPassword(_passwordController.text);
       await widget.preferenceService
           .setPhoneNumber(_phoneNumberController.text);
+      await widget.preferenceService.setEmail(_emailController.text);
 
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(

@@ -17,12 +17,6 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      // onPressed: () {
-      //   if (globalKey.currentState != null &&
-      //       globalKey.currentState!.validate()) {
-      //     Navigator.pushNamed(context, '/profile-page');
-      //   }
-      // },
       child: Container(
         padding: const EdgeInsets.all(16),
         color: color,

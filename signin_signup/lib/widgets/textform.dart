@@ -33,7 +33,7 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         widget.onChanged?.call(value);
       },
       obscureText: widget.obscureText,
-      controller: widget.controller, // Adding the controller here
+      controller: widget.controller, 
       decoration: InputDecoration(
         hintText: widget.hintText,
         border: InputBorder.none,

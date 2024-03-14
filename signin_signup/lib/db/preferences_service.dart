@@ -4,12 +4,12 @@ class PreferenceService {
   final SharedPreferences preferences;
   const PreferenceService(this.preferences);
 
-  Future<void> setEmail(String email) async {
-    await preferences.setString('email', email);
+  Future<void> setUsername(String username) async {
+    await preferences.setString('username', username);
   }
 
-  String? getEmail() {
-    return preferences.getString('email');
+  String? getUsername() {
+    return preferences.getString('username');
   }
 
   Future<void> setPassword(String password) async {
@@ -20,19 +20,19 @@ class PreferenceService {
     return preferences.getString('password');
   }
 
-  Future<void> setUsername(String username) async {
-    await preferences.setString('username', username);
-  }
-
-  String? getUsername() {
-    return preferences.getString('username');
-  }
-
   Future<void> setPhoneNumber(String phoneNumber) async {
-    await preferences.setString('phoneNumber', phoneNumber);
+    await preferences.setString('phone_number', phoneNumber);
   }
 
   String? getPhoneNumber() {
-    return preferences.getString('phoneNumber');
+    return preferences.getString('phone_number');
+  }
+
+  Future<void> setEmail(String email) async {
+    await preferences.setString('email', email);
+  }
+
+  String? getEmail() {
+    return preferences.getString('email');
   }
 }

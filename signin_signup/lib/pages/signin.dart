@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:signin_signup/db/preferences_service.dart';
+import 'package:signin_signup/pages/profile.dart';
 import 'package:signin_signup/widgets/button.dart';
 import 'package:signin_signup/widgets/container.dart';
 import 'package:signin_signup/widgets/textform.dart';
@@ -138,9 +139,21 @@ class _SignInState extends State<SignIn> {
   void _signIn() {
     final String? username = widget.preferenceService.getUsername();
     final String? password = widget.preferenceService.getPassword();
+    final String? phoneNumber = widget.preferenceService.getPhoneNumber();
+    final String? email = widget.preferenceService.getEmail();
+
     if (username == _usernameController.text &&
         password == _passwordController.text) {
-      Navigator.of(context).pushNamed('/profile');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(
+            username: username,
+            phoneNumber: phoneNumber,
+            email: email,
+          ),
+        ),
+      );
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Invalid credentials')));
