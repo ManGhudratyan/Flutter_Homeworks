@@ -164,6 +164,15 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future<void> _signUp() async {
+    if (_usernameController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _phoneNumberController.text.isEmpty ||
+        _emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('All fields are required')));
+      return;
+    }
+
     try {
       await widget.preferenceService.setUsername(_usernameController.text);
       await widget.preferenceService.setPassword(_passwordController.text);
@@ -176,6 +185,7 @@ class _SignUpState extends State<SignUp> {
         MaterialPageRoute(
           builder: (context) => ProfilePage(
             username: _usernameController.text,
+            password: _passwordController.text,
             phoneNumber: _phoneNumberController.text,
             email: _emailController.text,
           ),

@@ -142,6 +142,12 @@ class _SignInState extends State<SignIn> {
     final String? phoneNumber = widget.preferenceService.getPhoneNumber();
     final String? email = widget.preferenceService.getEmail();
 
+    if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Username or password cannot be empty')));
+      return;
+    }
+
     if (username == _usernameController.text &&
         password == _passwordController.text) {
       Navigator.push(

@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:signin_signup/db/preferences_service.dart';
+import 'package:signin_signup/pages/edit.dart';
 import 'package:signin_signup/widgets/button.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
     super.key,
     this.username,
+    this.preferenceService,
     this.phoneNumber,
     this.email,
+    this.password,
   });
 
+  final PreferenceService? preferenceService;
   final String? username;
   final String? phoneNumber;
   final String? email;
+  final String? password;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -73,13 +79,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  const Text('Edit',
-                      style: TextStyle(
-                          color: Color.fromRGBO(255, 177, 157, 1),
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Color.fromRGBO(255, 177, 157, 1),
-                          fontWeight: FontWeight.bold)),
+                  GestureDetector(
+                    onTap: _editPage,
+                    child: const Text('Edit',
+                        style: TextStyle(
+                            color: Color.fromRGBO(255, 177, 157, 1),
+                            fontSize: 16,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color.fromRGBO(255, 177, 157, 1),
+                            fontWeight: FontWeight.bold)),
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -263,6 +272,19 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _editPage() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => EditPage(
+          username: widget.username,
+          phoneNumber: widget.phoneNumber,
+          email: widget.email,
+          password: widget.password,
+        ),
       ),
     );
   }

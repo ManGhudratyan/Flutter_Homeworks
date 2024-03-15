@@ -35,4 +35,8 @@ class PreferenceService {
   String? getEmail() {
     return preferences.getString('email');
   }
+
+  void clearPreferences() {
+    preferences.clear();
+  }
 }

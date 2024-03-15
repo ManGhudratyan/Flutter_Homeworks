@@ -8,6 +8,7 @@ class TextFormWidget extends StatefulWidget {
     this.onChanged,
     this.obscureText = false,
     this.controller,
+    this.initialValue,
   });
 
   final String? Function(String?)? validator;
@@ -15,25 +16,30 @@ class TextFormWidget extends StatefulWidget {
   final void Function(String)? onChanged;
   final bool obscureText;
   final TextEditingController? controller;
+  final String? initialValue;
 
   @override
   State<TextFormWidget> createState() => _TextFormWidgetState();
 }
 
 class _TextFormWidgetState extends State<TextFormWidget> {
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? TextEditingController();
+    _controller.text = widget.initialValue ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: _globalKey,
+      controller: _controller,
       validator: widget.validator,
       style: const TextStyle(fontSize: 16),
-      onChanged: (value) {
-        widget.onChanged?.call(value);
-      },
+      onChanged: widget.onChanged,
       obscureText: widget.obscureText,
-      controller: widget.controller, 
       decoration: InputDecoration(
         hintText: widget.hintText,
         border: InputBorder.none,
@@ -42,5 +48,13 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         fillColor: const Color.fromRGBO(247, 247, 247, 1),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 }
