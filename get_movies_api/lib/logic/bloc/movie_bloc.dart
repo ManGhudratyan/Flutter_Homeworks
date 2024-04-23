@@ -14,8 +14,12 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   FutureOr<void> _mapGetMovieEventToState(
       GetMovies event, Emitter<MovieState> emit) async {
-    emit(MovieLoading(state));
-    final List<MovieModel> models = await _movieService.getMovies();
-    emit(MovieLoaded(models));
+    try {
+      emit(MovieLoading(state));
+      final List<MovieModel> models = await _movieService.getMovies();
+      emit(MovieLoaded(models));
+    } catch (e) {
+      emit(MovieFailed(state, e.toString()));
+    }
   }
 }

@@ -5,7 +5,7 @@ import 'package:get_movies_api/services/api_service.dart';
 import 'package:get_movies_api/services/movie_service.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +24,25 @@ class HomePage extends StatelessWidget {
             }
           },
           builder: (BuildContext context, MovieState state) {
-            return state is MovieLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Center(child: Text(state.movies.toString()));
+            if (state is MovieLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is MovieLoaded) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: state.movies.map((movie) {
+                    return Text(movie.titleText?.text ?? "");
+                  }).toList(),
+                ),
+              );
+            } else {
+              return Container();
+            }
           },
         ),
       ),
     );
   }
 }
-    

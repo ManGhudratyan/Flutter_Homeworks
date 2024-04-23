@@ -11,7 +11,7 @@ class MovieService {
     final Response response = await _apiService.makeRequest(HttpMethod.get,
         path: '/titles/x/upcoming');
     if (response.statusCode >= 200 && response.statusCode <= 300) {
-      final List<dynamic> decodedData = jsonDecode(response.body);
+      final List<dynamic> decodedData = jsonDecode(response.body)["results"];
       return decodedData
           .map((dynamic json) => MovieModel.fromJson(json))
           .toList();

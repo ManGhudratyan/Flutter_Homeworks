@@ -8,15 +8,14 @@ part of 'movie_model.dart';
 
 MovieModel _$MovieModelFromJson(Map<String, dynamic> json) => MovieModel(
       id: json['id'] as String?,
-      primaryImage: json['primaryImage'] as String?,
-      titleType: json['titleType'] as String?,
-      titleText: json['titleText'] as String?,
+      primaryImage: json['primaryImage'] == null
+          ? null
+          : PrimaryImageModel.fromJson(
+              json['primaryImage'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'primaryImage': instance.primaryImage,
-      'titleType': instance.titleType,
-      'titleText': instance.titleText,
     };
