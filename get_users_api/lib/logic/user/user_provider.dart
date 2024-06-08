@@ -13,11 +13,8 @@ class UserProvider extends ChangeNotifier {
     http.Response response =
         await _apiService.makeRequest(HttpMethod.get, '/users');
     if (response.statusCode >= 200 && response.statusCode <= 300) {
-      final String body = response.body;
-      List<dynamic> decodedData = jsonDecode(body);
-      List<UserModel> users =
-          decodedData.map((value) => UserModel.fromJson(value)).toList();
-      return users;
+      List<dynamic> decodedData = jsonDecode(response.body);
+      return decodedData.map((value) => UserModel.fromJson(value)).toList();
     }
     throw Exception('Response failed with status code: ${response.statusCode}');
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_users_api/logic/user/user_provider.dart';
-import 'package:get_users_api/models/user_model.dart';
 import 'package:get_users_api/pages/users_info_page.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +13,9 @@ class UserListPage extends StatefulWidget {
 class _UserListPageState extends State<UserListPage> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<UserModel>>(
+    return FutureBuilder(
       future: context.read<UserProvider>().getUsers(),
-      builder: (context, AsyncSnapshot<List<UserModel>> snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
@@ -57,19 +56,19 @@ class _UserListPageState extends State<UserListPage> {
                           ),
                         ),
                         GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      UsersInfoPage(user: user),
-                                ),
-                              );
-                            },
-                            child: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Color.fromARGB(255, 100, 90, 102),
-                            )),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UsersInfoPage(user: user),
+                              ),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Color.fromARGB(255, 100, 90, 102),
+                          ),
+                        ),
                       ],
                     ),
                     hoverColor: const Color.fromARGB(255, 221, 195, 225),

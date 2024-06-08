@@ -4,9 +4,8 @@ part 'release_year_model.g.dart';
 
 @JsonSerializable()
 class ReleaseYearModel {
-  ReleaseYearModel({this.year, this.endYear});
-  final DateTime? year;
-  final DateTime? endYear;
+  ReleaseYearModel({this.year});
+  final int? year;
 
   factory ReleaseYearModel.fromJson(Map<String, dynamic> json) =>
       _$ReleaseYearModelFromJson(json);

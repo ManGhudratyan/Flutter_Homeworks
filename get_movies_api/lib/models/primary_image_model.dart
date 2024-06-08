@@ -7,6 +7,7 @@ class PrimaryImageModel {
   PrimaryImageModel({this.id, this.url});
   final String? id;
   final String? url;
+
   factory PrimaryImageModel.fromJson(Map<String, dynamic> json) =>
       _$PrimaryImageModelFromJson(json);
 

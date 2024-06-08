@@ -7,4 +7,12 @@ sealed class MovieEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetMovies extends MovieEvent {}
+class GetMoviesEvent extends MovieEvent {}
+
+class GetMovieByIdEvent extends MovieEvent {
+ const GetMovieByIdEvent(this.id);
+
+  final int id;
+}
+
+
